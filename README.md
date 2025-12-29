@@ -7,7 +7,7 @@ This project uses CrewAI to generate LinkedIn posts on a given topic.
 
 1. **Navigate to the project directory:**
    ```bash
-   cd crewai_linkedin_post
+   cd LinkedIn-Corousel-Agent
    ```
 
 2. **Create a virtual environment:**
