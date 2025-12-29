@@ -21,6 +21,9 @@ This project uses CrewAI to generate LinkedIn posts on a given topic.
    - Themes: Multiple pre-designed looks (Neon, Swiss, Obsidian, Deep Ocean, Golden Luxe, Minimal Grey) defined in [theme_config.py](theme_config.py#L1).
    - Output folder: Generated PDFs are placed in `static/results` and follow the pattern `Carousel_{id}_{style_key}.pdf`.
 
+<img width="4167" height="2502" alt="Light version" src="https://github.com/user-attachments/assets/7934ad91-8056-4620-9218-da5bc85af09c" />
+
+
    **What this project demonstrates**
    - Programmatic layout and typography decisions that avoid overflow and keep content legible.
    - Theme-first design system where color, spacing, and small graphics are driven by a single config object.
@@ -34,11 +37,3 @@ This project uses CrewAI to generate LinkedIn posts on a given topic.
    - `crew_logic.py` — orchestration, slide JSON parsing, and `CarouselGenerator` renderer.
    - `theme_config.py` — theme definitions and tunable graphic parameters.
 
-   If you'd like, I can add a minimal showcase page or a simple gallery route to preview generated PDFs; say the word and I'll scaffold a small viewer in `app.py`.
-
-   ---
-   If you want, I can also:
-   - Add a small Flask route to serve the generated PDFs.
-   - Add a CLI entry for custom topics and output folder.
-
-   Tell me which of those you'd like next.
