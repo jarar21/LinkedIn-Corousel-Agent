@@ -33,7 +33,6 @@ This project uses CrewAI to generate LinkedIn posts on a given topic.
    **Sample artifacts**
    - Multi-theme PDFs (one file per theme) suitable for direct upload to LinkedIn as a document/carousel.
    - Example filenames and thumbnails are stored under `static/results` when the generator is run.
-   <img width="4167" height="2502" alt="LinkedIn Social Post Mockup (Community)" src="https://github.com/user-attachments/assets/19cab770-e7c0-4bb6-881f-fd6b02d2a11a" />
 
    **Where to look in the code**
    - `crew_logic.py` — orchestration, slide JSON parsing, and `CarouselGenerator` renderer.
