@@ -1,5 +1,5 @@
 
-# CrewAI LinkedIn Post Generator
+# CarouselAI
 
 This project uses CrewAI to generate LinkedIn posts on a given topic.
 
