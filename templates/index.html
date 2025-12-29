@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Carousel Generator</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    
+    <div class="main-wrapper">
+        <header>
+            <div class="logo">
+                <i class="fa-brands fa-linkedin"></i> <span>CarouselAI</span>
+            </div>
+            <p class="subtitle">Turn topics into viral PDFs in seconds</p>
+        </header>
+
+        <div class="card search-card">
+            <form method="POST" onsubmit="this.querySelector('button').innerHTML='<i class=\'fa fa-spinner fa-spin\'></i> Generating...';">
+                <div class="input-group">
+                    <input type="text" name="topic" placeholder="What do you want to write about?" required autocomplete="off">
+                    <button type="submit">
+                        Generate <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        {% if result %}
+        <div class="results-container">
+            
+            <!-- Left Column: The Post Text -->
+            <div class="result-card post-card">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-pen-nib"></i> LinkedIn Post</h2>
+                    <span class="badge">Copy Ready</span>
+                </div>
+                <div class="content-area">
+                    {{ result.post | replace('\n', '<br>') | safe }}
+                </div>
+            </div>
+
+            <!-- Right Column: The PDF Download -->
+            <div class="result-card download-card">
+    <div class="pdf-preview">
+        <i class="fa-solid fa-layer-group"></i>
+    </div>
+    <h3>Choose Your Style</h3>
+    <p>We generated {{ result.pdf_variations|length }} unique designs for you.</p>
+    
+    <div class="style-grid" style="display: grid; gap: 10px; width: 100%;">
+        {% for pdf in result.pdf_variations %}
+        <a href="{{ url_for('static', filename=pdf.url) }}" target="_blank" class="download-btn" style="justify-content: space-between; font-size: 0.9rem;">
+            <span>{{ pdf.name }}</span> 
+            <i class="fa-solid fa-download"></i>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
