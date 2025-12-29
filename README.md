@@ -11,94 +11,30 @@ This project uses CrewAI to generate LinkedIn posts on a given topic.
    ```
 
 2. **Create a virtual environment:**
-   On Windows:
-   ```bash
-   python -m venv venv
-   ```
-   On macOS/Linux:
-   ```bash
-   # CrewAI LinkedIn Carousel Generator
+   # LinkedIn Carousel Studio — Portfolio
 
-   This repository generates LinkedIn carousel PDFs from short slide JSON using CrewAI agents and a local image renderer.
+   A compact creative tool that turns short slide JSON into high-quality LinkedIn carousel PDFs. Built as a designer-friendly prototype and portfolio piece showcasing automated slide generation, theme-driven rendering, and PDF output optimized for social sharing.
 
-   **Key files**
-   - [crew_logic.py](crew_logic.py#L1): Main crew workflow and `CarouselGenerator` implementation.
-   - [theme_config.py](theme_config.py#L1): Theme definitions (colors, layout, graphics) used by the renderer.
-   - [app.py](app.py#L1): (Optional) Flask or web entrypoint (if present) to serve results.
+   **Highlights**
+   - Purpose: Generate multi-page PDFs where each page is a single LinkedIn carousel card.
+   - Visual output: 1080×1350 px pages (portrait) composed with custom themes, dynamic graphics, and typographic scaling.
+   - Themes: Multiple pre-designed looks (Neon, Swiss, Obsidian, Deep Ocean, Golden Luxe, Minimal Grey) defined in [theme_config.py](theme_config.py#L1).
+   - Output folder: Generated PDFs are placed in `static/results` and follow the pattern `Carousel_{id}_{style_key}.pdf`.
 
-   ## Quick setup
+   **What this project demonstrates**
+   - Programmatic layout and typography decisions that avoid overflow and keep content legible.
+   - Theme-first design system where color, spacing, and small graphics are driven by a single config object.
+   - Integration pattern: lightweight agent-driven content generation feeding a deterministic renderer (`crew_logic.py`).
 
-   1. Create and activate a Python virtual environment (recommended):
+   **Sample artifacts**
+   - Multi-theme PDFs (one file per theme) suitable for direct upload to LinkedIn as a document/carousel.
+   - Example filenames and thumbnails are stored under `static/results` when the generator is run.
 
-   On Windows:
-   ```powershell
-   python -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   ```
+   **Where to look in the code**
+   - `crew_logic.py` — orchestration, slide JSON parsing, and `CarouselGenerator` renderer.
+   - `theme_config.py` — theme definitions and tunable graphic parameters.
 
-   On macOS / Linux:
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   ```
-
-   2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-   3. Environment variables
-   - Create a `.env` file in the project root or set environment variables directly.
-   - Required: `SERPER_API_KEY` (used by the `SerperDevTool` search integration). Example `.env`:
-   ```
-   SERPER_API_KEY=your_serper_api_key_here
-   ```
-
-   The code uses `python-dotenv` to load `.env` automatically in `crew_logic.py`.
-
-   ## Run the PDF generator
-
-   To run the basic test that generates carousel PDFs, run:
-
-   ```bash
-   python crew_logic.py
-   ```
-
-   This calls `run_pdf_crew("AI Agents for Marketing")` (see the `if __name__ == "__main__"` block) and produces one PDF per theme.
-
-   Output location and filenames
-   - PDFs are written to the `static/results` folder by default.
-   - Filenames follow the pattern: `Carousel_{uniqueid}_{style_key}.pdf`, e.g. `Carousel_1234_neon_tech.pdf`.
-
-   ## How the generator works (brief)
-   - `run_pdf_crew(topic)` runs two CrewAI agents: a researcher and an architect.
-   - The architect returns a JSON array of 5 slides (title + content) used by `CarouselGenerator`.
-   - `CarouselGenerator.create_pdf(...)` renders each slide into 1080×1350 images and saves a multi-page PDF.
-   - Themes are defined in `theme_config.py` under the `THEMES` dictionary — add or tweak styles there.
-
-   ## Uploading the generated PDF as a LinkedIn carousel
-
-   1. Go to LinkedIn and start a new post.
-   2. Click the document / attach file option (icon looks like a document).
-   3. Select the generated PDF from `static/results` (the file can contain multiple pages — each page becomes a carousel slide).
-   4. Give the document a title and click `Done`, then publish.
-
-   Best-practice tips for LinkedIn carousel PDFs
-   - Recommended slide size: 1080 × 1350 px (portrait) — this is what the renderer uses by default.
-   - Keep text large and readable: title ≈ 48–95pt, body ≈ 36–48pt depending on content.
-   - Use clear page breaks; each PDF page is one carousel card.
-
-   ## Customization
-   - Edit or add themes in [theme_config.py](theme_config.py#L1). Each theme controls colors, fonts, layout, and graphics.
-   - Change output directory in `CarouselGenerator.__init__` or pass a different `output_folder` when constructing it.
-
-   ## Next steps / automation ideas
-   - Add a simple route in [app.py](app.py#L1) to list and serve generated PDFs for download.
-   - Add an upload helper that uses LinkedIn APIs (requires app credentials) to programmatically create posts with PDFs.
-
-   ## Troubleshooting
-   - If PDFs are not created, confirm `SERPER_API_KEY` is set and that `crew_logic.py` ran without JSON parse errors.
-   - Check `static/results` for output and console logs for errors.
+   If you'd like, I can add a minimal showcase page or a simple gallery route to preview generated PDFs; say the word and I'll scaffold a small viewer in `app.py`.
 
    ---
    If you want, I can also:
